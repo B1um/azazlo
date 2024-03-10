@@ -1,0 +1,420 @@
+////1
+const readline = require('readline');
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+let paragraph = 'Начальный текст абзаца.';
+
+rl.question('Введите значение: ', (inputValue) => {
+  paragraph += ' ' + inputValue;
+  console.log(paragraph);
+  rl.close();
+});
+////2
+var inputValues = [];
+
+var sumParagraph = document.createElement('p');
+document.body.appendChild(sumParagraph);
+
+var button = document.createElement('button');
+button.textContent = 'Посчитать сумму';
+document.body.appendChild(button);
+
+button.addEventListener('click', function() {
+    var sum = inputValues.reduce(function(acc, currentValue) {
+        return acc + parseFloat(currentValue);
+    }, 0);
+
+    sumParagraph.textContent = 'Сумма: ' + sum;
+});
+
+for (var i = 1; i <= 3; i++) {
+    var input = document.createElement('input');
+    input.type = 'number';
+    input.placeholder = 'Введите число ' + i;
+
+    input.addEventListener('input', function(event) {
+        var index = inputValues.indexOf(event.target.value);
+        if (index === -1) {
+            inputValues.push(parseFloat(event.target.value));
+        }
+    });
+
+    document.body.appendChild(input);
+}
+////3
+var userInput = prompt("Введите число:");
+
+var number = parseFloat(userInput);
+
+if (!isNaN(number)) {
+
+    var sumOfDigits = 0;
+    var numberString = Math.abs(number).toString(); 
+
+    for (var i = 0; i < numberString.length; i++) {
+        sumOfDigits += parseInt(numberString[i]);
+    }
+
+    console.log("Сумма цифр числа:", sumOfDigits);
+} else {
+    console.log("Введено некорректное число.");
+}
+////4
+var userInput = prompt("Введите числа через запятую:");
+
+var numbers = userInput.split(',').map(function(item) {
+    return parseFloat(item.trim()); 
+});
+
+var validNumbers = numbers.filter(function(item) {
+    return !isNaN(item);
+});
+
+if (validNumbers.length > 0) {
+    var sum = validNumbers.reduce(function(acc, currentValue) {
+        return acc + currentValue;
+    }, 0);
+
+    var average = sum / validNumbers.length;
+
+    console.log("Среднее арифметическое чисел:", average);
+} else {
+    console.log("Не введено ни одного корректного числа.");
+}
+////5
+var fullName = prompt("Введите ФИО через пробел:");
+
+var names = fullName.split(' ');
+
+var lastName = names[0] || "";
+var firstName = names[1] || "";
+var middleName = names.slice(2).join(' ') || "";
+
+console.log("Фамилия: ", lastName);
+console.log("Имя: ", firstName);
+console.log("Отчество: ", middleName);
+////6
+var fullName = prompt("Введите ФИО через пробел:");
+
+var names = fullName.split(' ');
+
+names = names.map(function(name) {
+    return name.charAt(0).toUpperCase() + name.slice(1);
+});
+
+var updatedFullName = names.join(' ');
+
+console.log("Обновленное ФИО: ", updatedFullName);
+////7
+var userInput = prompt("Введите текст:");
+
+function countWords(text) {
+    var words = text.split(/\s+/);
+
+    words = words.filter(function(word) {
+        return word !== '';
+    });
+
+    return words.length;
+}
+
+console.log("Количество слов в тексте:", countWords(userInput));
+////8
+
+var inputDate = prompt("Введите дату в формате DD.MM.YYYY:");
+
+var dateComponents = inputDate.split('.');
+
+if (dateComponents.length === 3) {
+    var formattedDate = dateComponents[2] + '-' + dateComponents[1] + '-' + dateComponents[0];
+
+
+    console.log("Отформатированная дата:", formattedDate);
+} else {
+    console.log("Некорректный формат даты.");
+}
+////9
+var inputWord = prompt("Введите слово:");
+
+function isPalindrome(word) {
+    var lowerCaseWord = word.toLowerCase();
+
+    return lowerCaseWord === lowerCaseWord.split('').reverse().join('');
+}
+
+if (isPalindrome(inputWord)) {
+    console.log("Слово является палиндромом.");
+} else {
+    console.log("Слово не является палиндромом.");
+}
+////10
+var userInput = prompt("Введите число:");
+
+function containsDigitThree(number) {
+    return number.toString().includes('3');
+}
+
+var userNumber = parseFloat(userInput);
+
+if (!isNaN(userNumber)) {
+    if (containsDigitThree(userNumber)) {
+        console.log("Число содержит цифру 3.");
+    } else {
+        console.log("Число не содержит цифру 3.");
+    }
+} else {
+    console.log("Введено некорректное число.");
+}
+////11
+var paragraphs = document.querySelectorAll('p');
+var button = document.createElement('button');
+button.textContent = 'Добавить порядковые номера';
+document.body.appendChild(button);
+
+button.addEventListener('click', function() {
+    paragraphs.forEach(function(paragraph, index) {
+        paragraph.textContent += ' ' + (index + 1);
+    });
+});
+
+var loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+
+for (var i = 0; i < 3; i++) {
+    var paragraph = document.createElement('p');
+    paragraph.textContent = loremIpsum;
+    document.body.appendChild(paragraph);
+}
+////12
+var links = document.querySelectorAll('a');
+
+links.forEach(function(link) {
+    link.textContent += ' (' + link.href + ')';
+});
+
+console.log("Измененные ссылки:", links);
+////13
+var links = document.querySelectorAll('a');
+links.forEach(function(link) {
+    if (link.href.startsWith('http://')) {
+        link.textContent += ' →';
+    }
+});
+
+console.log("Измененные ссылки:", links);
+////14
+var paragraphs = document.querySelectorAll('p');
+
+paragraphs.forEach(function(paragraph) {
+    paragraph.addEventListener('click', function() {
+        var number = parseFloat(paragraph.textContent);
+        var square = Math.pow(number, 2);
+
+        paragraph.textContent = square;
+    });
+});
+
+console.log("Измененные абзацы:", paragraphs);
+////15
+var inputDate = prompt("Введите дату в формате DD.MM.YYYY:");
+
+var dateComponents = inputDate.split('.');
+
+if (dateComponents.length === 3) {
+    var formattedDate = new Date(dateComponents[2], dateComponents[1] - 1, dateComponents[0]);
+
+    var daysOfWeek = ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"];
+    var dayOfWeek = daysOfWeek[formattedDate.getDay()];
+
+    console.log("День недели на ", inputDate, ":", dayOfWeek);
+} else {
+    console.log("Некорректный формат даты.");
+}
+////16
+var input = document.createElement('input');
+input.type = 'text';
+input.value = '0';
+document.body.appendChild(input);
+
+var increaseButton = document.createElement('button');
+increaseButton.textContent = '+1';
+document.body.appendChild(increaseButton);
+
+var decreaseButton = document.createElement('button');
+decreaseButton.textContent = '-1';
+document.body.appendChild(decreaseButton);
+
+increaseButton.addEventListener('click', function() {
+    var currentValue = parseInt(input.value);
+    input.value = currentValue + 1;
+});
+
+decreaseButton.addEventListener('click', function() {
+    var currentValue = parseInt(input.value);
+    input.value = currentValue > 0 ? currentValue - 1 : 0;
+});
+
+console.log("Текущее значение инпута:", input.value);
+////17
+var numParagraphs = prompt("Введите количество абзацев:");
+
+numParagraphs = parseInt(numParagraphs);
+
+if (!isNaN(numParagraphs) && numParagraphs > 0) {
+    var clickCount = 0;
+
+    for (var i = 0; i < numParagraphs; i++) {
+        console.log("Клик на абзаце", i + 1);
+        clickCount++;
+    }
+
+    console.log("Суммарное количество нажатий:", clickCount);
+} else {
+    console.log("Введено некорректное количество абзацев.");
+}
+////18
+var divTexts = [
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+];
+
+divTexts.forEach(function(text, index) {
+    var truncatedText = text.slice(0, 10) + '...';
+    console.log("Обрезанный текст в диве " + (index + 1) + ":", truncatedText);
+});
+////19
+function generateRandomString(length) {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+
+    for (var i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    return result;
+}
+
+var input = document.createElement('input');
+input.type = 'text';
+document.body.appendChild(input);
+
+var generateButton = document.createElement('button');
+generateButton.textContent = 'Генерировать строку';
+document.body.appendChild(generateButton);
+
+generateButton.addEventListener('click', function() {
+    var randomString = generateRandomString(8);
+
+    input.value = randomString;
+
+    console.log("Сгенерированная строка:", randomString);
+});
+////20
+var input = document.createElement('input');
+input.type = 'text';
+document.body.appendChild(input);
+
+var shuffleButton = document.createElement('button');
+shuffleButton.textContent = 'Перемешать строку';
+document.body.appendChild(shuffleButton);
+
+shuffleButton.addEventListener('click', function() {
+
+    var inputText = input.value;
+
+    var characters = inputText.split('');
+
+    for (var i = characters.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = characters[i];
+        characters[i] = characters[j];
+        characters[j] = temp;
+    }
+
+    var shuffledText = characters.join('');
+
+    input.value = shuffledText;
+
+    console.log("Перемешанная строка:", shuffledText);
+});
+////21
+var input = document.createElement('input');
+input.type = 'text';
+document.body.appendChild(input);
+
+var convertButton = document.createElement('button');
+convertButton.textContent = 'Конвертировать в Цельсии';
+document.body.appendChild(convertButton);
+
+var resultParagraph = document.createElement('p');
+document.body.appendChild(resultParagraph);
+
+convertButton.addEventListener('click', function() {
+    var fahrenheitTemperature = parseFloat(input.value);
+
+    if (!isNaN(fahrenheitTemperature)) {
+        var celsiusTemperature = (fahrenheitTemperature - 32) * (5 / 9);
+
+        celsiusTemperature = celsiusTemperature.toFixed(2);
+
+        resultParagraph.textContent = "Температура в градусах Цельсия: " + celsiusTemperature;
+    } else {
+        resultParagraph.textContent = "Введите корректную температуру в градусах Фаренгейта.";
+    }
+});
+////22
+var input = document.createElement('input');
+input.type = 'text';
+document.body.appendChild(input);
+
+var calculateFactorialButton = document.createElement('button');
+calculateFactorialButton.textContent = 'Вычислить факториал';
+document.body.appendChild(calculateFactorialButton);
+
+var resultParagraph = document.createElement('p');
+document.body.appendChild(resultParagraph);
+
+calculateFactorialButton.addEventListener('click', function() {
+    var inputNumber = parseInt(input.value);
+
+    if (!isNaN(inputNumber) && inputNumber >= 0) {
+        var factorial = 1;
+        for (var i = 2; i <= inputNumber; i++) {
+            factorial *= i;
+        }
+
+        resultParagraph.textContent = "Факториал числа " + inputNumber + " равен: " + factorial;
+    } else {
+        resultParagraph.textContent = "Введите корректное неотрицательное число.";
+////23
+function findRoots(a, b, c) {
+    var discriminant = b * b - 4 * a * c;
+    
+    if (discriminant > 0) {
+        var root1 = (-b + Math.sqrt(discriminant)) / (2 * a);
+        var root2 = (-b - Math.sqrt(discriminant)) / (2 * a);
+        return [root1, root2];
+    } else if (discriminant === 0) {
+        var root = -b / (2 * a);
+        return [root];
+    } else {
+        return [];
+    }
+}
+
+var a = parseFloat(prompt("Введите коэффициент a:"));
+var b = parseFloat(prompt("Введите коэффициент b:"));
+var c = parseFloat(prompt("Введите коэффициент c:"));
+
+if (!isNaN(a) && !isNaN(b) && !isNaN(c)) {
+    var roots = findRoots(a, b, c);
+
+    console.log("Корни квадратного уравнения:", roots);
+} else {
+    console.log("Введите корректные коэффициенты.");
+}
